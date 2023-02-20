@@ -14,6 +14,9 @@ namespace TicTacToe
             };
 
 
+        static int turns = 0;
+
+
 
         static void Main(string[] args)
             {
@@ -28,13 +31,13 @@ namespace TicTacToe
                 if (player == 2)
                     {
                     player = 1;
-                    EnterXorO(player, input);
+                    EnterXorO('O', input);
 
                     }
                 else if (player == 1)
                     {
                     player = 2;
-                    EnterXorO(player, input);
+                    EnterXorO('X', input);
 
                     }
 
@@ -45,28 +48,37 @@ namespace TicTacToe
                 foreach (char playerChar in playerChars)
                     {
                     if (((playField[0, 0] == playerChar) && (playField[0, 1] == playerChar) && (playField[0, 2] == playerChar))
-                        || ((playField[1, 0] == playerChar) && (playField[1, 1] == playerChar) && (playField[1, 2] == playerChar))
-                        || ((playField[2, 0] == playerChar) && (playField[2, 1] == playerChar) && (playField[2, 2] == playerChar))
-
-                        || ((playField[0, 0] == playerChar) && (playField[1, 0] == playerChar) && (playField[2, 0] == playerChar))
-                        || ((playField[0, 1] == playerChar) && (playField[1, 1] == playerChar) && (playField[1, 2] == playerChar))
-                        || ((playField[0, 2] == playerChar) && (playField[2, 1] == playerChar) && (playField[2, 2] == playerChar))
-
-                        || ((playField[0, 0] == playerChar) && (playField[1, 1] == playerChar) && (playField[2, 2] == playerChar))
-                        || ((playField[0, 2] == playerChar) && (playField[1, 1] == playerChar) && (playField[2, 0] == playerChar))
-                        )
+                         || ((playField[1, 0] == playerChar) && (playField[1, 1] == playerChar) && (playField[1, 2] == playerChar))
+                         || ((playField[2, 0] == playerChar) && (playField[2, 1] == playerChar) && (playField[2, 2] == playerChar))
+                         || ((playField[0, 0] == playerChar) && (playField[1, 0] == playerChar) && (playField[2, 0] == playerChar))
+                         || ((playField[0, 1] == playerChar) && (playField[1, 1] == playerChar) && (playField[2, 1] == playerChar))
+                         || ((playField[0, 2] == playerChar) && (playField[1, 2] == playerChar) && (playField[2, 2] == playerChar))
+                         || ((playField[0, 0] == playerChar) && (playField[1, 1] == playerChar) && (playField[2, 2] == playerChar))
+                         || ((playField[0, 2] == playerChar) && (playField[1, 1] == playerChar) && (playField[2, 0] == playerChar))
+                         )
                         {
                         if (playerChar == 'X')
                             {
-                            Console.WriteLine($"\n{playerChar} is the winner!");
+                            Console.WriteLine("\nPlayer 2 is the winner!");
                             }
                         else
                             {
-                            Console.WriteLine($"\n{playerChar} is the winner!");
+                            Console.WriteLine("\nPlayer 1 is the winner!");
                             }
-                        break;
+                        Console.WriteLine("\nPlease press any key to reset the game");
+                        Console.ReadKey();
+                        ResetField();
                         }
-                    ///////// continue ////////////////////
+                    else if (turns == 10)
+                        {
+                        Console.WriteLine("\nDraw!");
+                        Console.WriteLine("\nPlease press any key to reset the game");
+                        Console.ReadKey();
+                        ResetField();
+                        break;
+
+
+                        }
                     }
 
 
@@ -117,7 +129,20 @@ namespace TicTacToe
                 } while (true);
 
             }
+        public static void ResetField()
+            {
+            char[,] playFieldInitial =
+   {
+            {'1','2','3'},
+            {'4','5','6'},
+            {'7','8','9'}
+            };
 
+            playField = playFieldInitial;
+
+            SetField();
+            turns = 0;
+            }
         public static void SetField()
             {
             Console.Clear();
@@ -129,15 +154,11 @@ namespace TicTacToe
             Console.WriteLine("___|___|___");
             Console.WriteLine("   |   |    ");
             Console.WriteLine(" {0} | {1} | {2}  ", playField[2, 0], playField[2, 1], playField[2, 2]);
+            turns++;
             }
 
-        public static void EnterXorO(int player, int input)
+        public static void EnterXorO(char PlayerSign, int input)
             {
-            char PlayerSign = ' ';
-            if (player == 1)
-                PlayerSign = 'X';
-            else if (player == 2)
-                PlayerSign = 'O';
 
             switch (input)
                 {
