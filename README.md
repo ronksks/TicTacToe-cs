@@ -1,5 +1,6 @@
 # Tic Tac Toe Game in C#
 ## This program implements the Tic Tac Toe game using C#.<br />
+## Click the link to play: https://replit.com/@RonYalensky/TicTacToe-cs
 The game involves two players, who take turns placing their mark (X or O) in a 3x3 grid until a player wins or the game ends in a draw.<br />
 
 The playfield is represented by a two-dimensional character array named playField, with each element containing a number from 1 to 9 representing the available spaces on the board.<br />
